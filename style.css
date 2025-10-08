@@ -1,80 +1,80 @@
-/* TÍTULO DA PÁGINA */
-.titulo-pagina {
+/* TÍTULO FIXO DENTRO DO CONTAINER */
+.titulo-local {
   position: sticky;
   top: 0;
   background-color: #fff;
-  padding: 12px 0;
+  padding: 10px 0;
   text-align: center;
+  font-size: 18px;
+  font-weight: bold;
   border-bottom: 1px solid #ccc;
   z-index: 10;
-}
-
-.titulo-pagina h1 {
-  font-size: 24px;
-  margin: 0;
-  font-weight: bold;
+  margin: 1;
 }
 
 /* CONTAINER DA TABELA */
 .tabela-container {
-  width: 60%;
-  max-width: 1000px;
-  margin: 20px auto;
+  width: 100%;
+  max-width: 550px;
+  margin: 10px auto;
   max-height: 300px;
   overflow-y: auto;
-  border: 3px solid #ccc;
-  background-color: white;
+  overflow-x: auto;
+  border: 1px solid #ccc;
+  background-color: #fff;
   box-shadow: 0 0 5px rgba(0,0,0,0.1);
   position: relative;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-/* TABELA */
+/* TABELA COMPACTA E FLEXÍVEL */
 table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 14px;
+  font-size: 12px;
   table-layout: auto;
 }
 
-/* CABEÇALHO FIXO */
+/* CABEÇALHO FIXO ABAIXO DO TÍTULO */
 thead th {
   position: sticky;
-  top: 0;
-  background-color: white;
-  z-index: 2;
-  padding: 8px;
+  top: 36px;
+  background-color: #fff;
+  z-index: 5;
+  padding: 4px;
   border: 1px solid #ccc;
   text-align: center;
   font-weight: bold;
-  white-space: nowrap;
 }
 
-/* CÉLULAS */
+/* CÉLULAS FLEXÍVEIS */
 td {
-  border: 2px solid #ccc;
-  padding: 6px;
+  border: 1px solid #ccc;
+  padding: 3px;
   text-align: center;
   vertical-align: middle;
-  white-space: nowrap;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
-/* INPUTS */
+/* INPUTS COMPACTOS */
 input[type="text"],
 input[type="date"],
 input[type="time"] {
-  width: 90%;
-  padding: 4px;
-  font-size: 13px;
+  width: 100%;
+  padding: 2px;
+  font-size: 11px;
   text-align: center;
   box-sizing: border-box;
   border: 1px solid #aaa;
   border-radius: 3px;
 }
 
-/* BOTÕES */
+/* BOTÕES COMPACTOS */
 button {
-  padding: 4px 8px;
-  font-size: 12px;
+  padding: 2px 5px;
+  font-size: 10px;
   cursor: pointer;
   border: none;
   border-radius: 3px;
@@ -86,11 +86,31 @@ button:hover {
   background-color: #d0d0d0;
 }
 
+/* COLUNA DE CARGA AJUSTÁVEL */
+td:nth-child(5) {
+  width: 60px;
+  max-width: 50px;
+  min-width: 50px;
+}
+
 /* STATUS DAS LINHAS */
 tr.saida-realizada {
   background-color: #d4edda;
 }
 
 tr.pulou-vez {
-  background-color: #f8d7da;
+  background-color: #f8d7da !important;
+}
+
+.alerta-pulou {
+  color: #a94442;
+  font-size: 10px;
+  margin-top: 2px;
+  font-weight: bold;
+}
+
+/* MARCADOR DE CARGA ATUAL */
+tr.carga-atual {
+  border-top: 2px solid #007bff;
+  background-color: #eef6ff;
 }
