@@ -1,0 +1,96 @@
+/* TÍTULO DA PÁGINA */
+.titulo-pagina {
+  position: sticky;
+  top: 0;
+  background-color: #fff;
+  padding: 12px 0;
+  text-align: center;
+  border-bottom: 1px solid #ccc;
+  z-index: 10;
+}
+
+.titulo-pagina h1 {
+  font-size: 24px;
+  margin: 0;
+  font-weight: bold;
+}
+
+/* CONTAINER DA TABELA */
+.tabela-container {
+  width: 60%;
+  max-width: 1000px;
+  margin: 20px auto;
+  max-height: 300px;
+  overflow-y: auto;
+  border: 3px solid #ccc;
+  background-color: white;
+  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+  position: relative;
+}
+
+/* TABELA */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  table-layout: auto;
+}
+
+/* CABEÇALHO FIXO */
+thead th {
+  position: sticky;
+  top: 0;
+  background-color: white;
+  z-index: 2;
+  padding: 8px;
+  border: 1px solid #ccc;
+  text-align: center;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+/* CÉLULAS */
+td {
+  border: 2px solid #ccc;
+  padding: 6px;
+  text-align: center;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+/* INPUTS */
+input[type="text"],
+input[type="date"],
+input[type="time"] {
+  width: 90%;
+  padding: 4px;
+  font-size: 13px;
+  text-align: center;
+  box-sizing: border-box;
+  border: 1px solid #aaa;
+  border-radius: 3px;
+}
+
+/* BOTÕES */
+button {
+  padding: 4px 8px;
+  font-size: 12px;
+  cursor: pointer;
+  border: none;
+  border-radius: 3px;
+  background-color: #e0e0e0;
+  transition: background-color 0.2s ease;
+}
+
+button:hover {
+  background-color: #d0d0d0;
+}
+
+/* STATUS DAS LINHAS */
+tr.saida-realizada {
+  background-color: #d4edda;
+}
+
+tr.pulou-vez {
+  background-color: #f8d7da;
+}
