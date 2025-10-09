@@ -1,75 +1,122 @@
-// TABELA DE CONTROLE DE CARGAS
 const tabelaCarregamento = document.getElementById("tabela-carregamento");
 
+// Gera as linhas da tabela
 for (let i = 1; i <= 109; i++) {
   const linha = document.createElement("tr");
-
-  // Se for a primeira linha (Carga 1), adiciona classe "linha-fixa"
-  if (i === 1) {
-    linha.classList.add("linha-fixa");
-  }
+  linha.dataset.numero = i;
 
   linha.innerHTML = `
-    <td><input type="date" value="00-00-0000"></td>
+    <td><input type="date"></td>
     <td><input type="text" value="Transportadora"></td>
     <td><input type="text" value="Nome"></td>
-    <td><input type="time" value="00:00"></td>
+    <td><input type="time"></td>
     <td class="numero-carga">${i}</td>
     <td>
       <button onclick="marcarSaida(this)">Saiu</button>
+      <button onclick="pularCarga(this)">Pular</button>
     </td>
   `;
 
   tabelaCarregamento.appendChild(linha);
 }
 
+// Inicia com a carga 1 como atual
+atualizarCargaAtual(1);
+
+// Função para marcar saída
 function marcarSaida(botao) {
-  const linhaAtual = botao.closest("tr");
-  linhaAtual.classList.remove("pulou-vez", "carga-atual");
-  linhaAtual.classList.add("saida-realizada");
+  const linha = botao.closest("tr");
+  const numeroLinha = parseInt(linha.dataset.numero);
 
-  // Remove marcador anterior
-  document.querySelectorAll(".carga-atual").forEach(el => {
-    el.classList.remove("carga-atual");
-  });
+  if (!linha.classList.contains("carga-atual") && !linha.classList.contains("pulou-vez")) return;
 
-  // Remove alerta se existia
-  const alertaExistente = linhaAtual.querySelector(".alerta-pulou");
-  if (alertaExistente) alertaExistente.remove();
+  const confirmar = confirm("⚠ Atenção!\nAo confirmar, esta linha será travada e não poderá ser editada até o reset da lista.\nDeseja continuar?");
+  if (!confirmar) return; // Se cancelar, nada acontece
 
-  // Identifica a próxima linha não marcada
-  let proxima = linhaAtual.nextElementSibling;
-  while (proxima && proxima.classList.contains("saida-realizada")) {
-    proxima = proxima.nextElementSibling;
-  }
+  linha.classList.add("saida-realizada");
+  linha.classList.remove("carga-atual", "pulou-vez");
+  removerAlerta(linha);
 
-  // Marca a próxima como carga atual
-  if (proxima) {
-    proxima.classList.add("carga-atual");
-
-    // Verifica todas as linhas acima da nova carga atual
-    let anterior = proxima.previousElementSibling;
-    while (anterior) {
-      if (!anterior.classList.contains("saida-realizada")) {
-        anterior.classList.add("pulou-vez");
-
-        // Remove alerta antigo se houver
-        const alertaAntigo = anterior.querySelector(".alerta-pulou");
-        if (alertaAntigo) alertaAntigo.remove();
-
-        // Adiciona alerta visual
-        const celulas = anterior.querySelectorAll("td");
-        if (celulas.length > 0) {
-          const aviso = document.createElement("div");
-          aviso.className = "alerta-pulou";
-          aviso.textContent = "⚠ Pulou a vez";
-          celulas[celulas.length - 1].appendChild(aviso);
-        }
-      }
-      anterior = anterior.previousElementSibling;
-    }
-  }
+  desativarLinha(linha);
+  atualizarCargaAtual(numeroLinha + 1);
 }
 
+// Função para pular carga
+function pularCarga(botao) {
+  const linha = botao.closest("tr");
+  const numeroLinha = parseInt(linha.dataset.numero);
 
+  if (!linha.classList.contains("carga-atual")) return;
 
+  const confirmar = confirm("⚠ Atenção!\nEsta carga será marcada como PENDENTE.\nDeseja continuar?");
+  if (!confirmar) return; // Se cancelar, nada acontece
+
+  linha.classList.add("pulou-vez");
+  linha.classList.remove("carga-atual", "saida-realizada");
+  adicionarAlerta(linha);
+
+  atualizarCargaAtual(numeroLinha + 1);
+}
+
+// Atualiza o marcador de carga atual
+function atualizarCargaAtual(numero) {
+  document.querySelectorAll(".carga-atual").forEach(el => el.classList.remove("carga-atual"));
+
+  const proxima = [...tabelaCarregamento.rows].find(row => parseInt(row.dataset.numero) === numero);
+  if (proxima) proxima.classList.add("carga-atual");
+
+  aplicarRegrasDeBloqueio(numero);
+}
+
+// Aplica regras de bloqueio e ativação de botões
+function aplicarRegrasDeBloqueio(numeroAtual) {
+  const linhas = [...tabelaCarregamento.rows];
+
+  linhas.forEach(linha => {
+    const numeroLinha = parseInt(linha.dataset.numero);
+    const botoes = linha.querySelectorAll("button");
+    const inputs = linha.querySelectorAll("input");
+
+    if (numeroLinha < numeroAtual) {
+      if (linha.classList.contains("saida-realizada")) {
+        // Linha verde: bloqueada
+        botoes.forEach(btn => btn.disabled = true);
+        inputs.forEach(input => input.disabled = true);
+      } else if (linha.classList.contains("pulou-vez")) {
+        // Linha vermelha: ainda pode ser editada
+        botoes.forEach(btn => btn.disabled = false);
+        inputs.forEach(input => input.disabled = false);
+      }
+    } else if (numeroLinha === numeroAtual) {
+      // Linha atual: ativa
+      botoes.forEach(btn => btn.disabled = false);
+      inputs.forEach(input => input.disabled = false);
+    } else {
+      // Linhas abaixo do marcador: bloqueadas
+      botoes.forEach(btn => btn.disabled = true);
+      inputs.forEach(input => input.disabled = true);
+    }
+  });
+}
+
+// Desativa botões e inputs da linha
+function desativarLinha(linha) {
+  linha.querySelectorAll("button").forEach(btn => btn.disabled = true);
+  linha.querySelectorAll("input").forEach(input => input.disabled = true);
+}
+
+// Adiciona alerta visual
+function adicionarAlerta(linha) {
+  removerAlerta(linha);
+  const celulas = linha.querySelectorAll("td");
+  const aviso = document.createElement("div");
+  aviso.className = "alerta-pulou";
+  aviso.textContent = "⚠ Pulou a vez,Carga com pendência";
+  celulas[celulas.length - 1].appendChild(aviso);
+}
+
+// Remove alerta visual
+function removerAlerta(linha) {
+  const alerta = linha.querySelector(".alerta-pulou");
+  if (alerta) alerta.remove();
+}
