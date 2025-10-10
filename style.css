@@ -12,16 +12,18 @@ body {
   padding: 20px;
 }
 
+
 /* Título fixo */
 .titulo-local {
   position: sticky;
+  top: 0px;
   z-index: 100;
-  padding: 5px;
+  padding: 2px;
   font-family: 'Segoe UI', 'Roboto', sans-serif;
   font-size: 2rem;
-  font-weight: 1000;
+  font-weight: 600;
   color: #ff6b6b;
-  text-shadow: 2px 2px 2px rgba(0,0,0,0.2);
+  text-shadow: 4px 4px 4px rgba(0,0,0,0.2);
   text-align: center;
   background-color: #f4f4f4;
   border-radius: 30px;
@@ -29,33 +31,34 @@ body {
 
 /* Container da tabela */
 .tabela-container {
-  max-height: 1000px;
-  overflow-y: auto;
-  max-width: 1000px;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
   margin: auto;
-  background-color: #fff;
+  background-color: #ddd;
   padding: 0;
   border-radius: 30px;
   box-shadow: 0 0 15px rgba(0,0,0,0.1);
+  -webkit-overflow-scrolling: touch;
 }
 
 /* Área de rolagem da tabela */
 .tabela-scroll {
-  max-height: 600px;
+  max-height: 450px;
   overflow-y: auto;
 }
 
 /* Tabela */
 table {
   width: 100%;
+  table-layout: auto; /* permite que as colunas se ajustem automaticamente */
   border-collapse: collapse;
-  background-color: #e4e4e4;
 }
 
 /* Cabeçalho fixo da tabela */
 #tabela-cargas thead th {
   position: sticky;
-  top: 0;
+  top: 0px; 
   z-index: 99;
   background-color: #ff6b6b;
   color: white;
@@ -74,6 +77,7 @@ table {
 th, td {
   padding: 12px;
   text-align: left;
+  word-break: break-word;
   border-bottom: 1px solid #ddd;
   line-height: 1.4;
   min-height: 40px;
@@ -127,21 +131,20 @@ button:nth-child(1):hover {
 }
 
 .carga-atual .numero-carga {
-  position: relative;
+  display: flex;
+  justify-content: center;      /* Centraliza horizontalmente */
+  align-items: center;          /* Centraliza verticalmente */
   font-size: 1.2rem;
-  background: linear-gradient(45deg, #ff6b6b, #f7d794);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
   animation: pulse 2s infinite;
-  padding: 2px 10px;
+  padding: 1px 1px;
   border-radius: 50px;
-  border: 2px solid #ffc107;
-  text-align: center;
-  display: inline-block;
-  box-shadow: 0 0 2px rgba(255, 193, 7, 0.6);
-  margin: auto;
-  top: 15px;
-  left: 20px;
+  border: 1px solid #ffc107;
+  box-shadow: 3 6 12px rgba(255, 193, 7, 0.6);
+  background-color: #fffbe6;
+  color: black;
+  margin-left: 10px;
+  margin-top: 10px;
+  margin-right: 10px;
 }
 
 /* Animação de pulso */
@@ -176,3 +179,96 @@ button:nth-child(1):hover {
   font-weight: bold;
 }
 
+/* Coluna 1: Data */
+#tabela-cargas th:nth-child(1),
+#tabela-cargas td:nth-child(1) {
+  text-align: center;
+  vertical-align: middle;
+}
+
+/* Coluna 2: Cliente */
+#tabela-cargas th:nth-child(2),
+#tabela-cargas td:nth-child(2) {
+  text-align: center;
+  vertical-align: middle;
+}
+
+/* Coluna 3: Motorista */
+#tabela-cargas th:nth-child(3),
+#tabela-cargas td:nth-child(3) {
+  text-align: center;
+  vertical-align: middle;
+}
+
+/* Coluna 4: Horário de Saída */
+#tabela-cargas th:nth-child(4),
+#tabela-cargas td:nth-child(4) {
+  text-align: center;
+  vertical-align: middle;
+}
+
+/* Coluna 5: N° Carga */
+#tabela-cargas th:nth-child(5),
+#tabela-cargas td:nth-child(5) {
+  text-align: center;
+  vertical-align: middle;
+}
+
+/* Coluna 6: Marcar ação */
+#tabela-cargas th:nth-child(6),
+#tabela-cargas td:nth-child(6) {
+  text-align: center;
+  vertical-align: middle;
+}
+
+@media (max-width: 768px) {
+  body {
+    padding: 10px;
+  }
+
+  .titulo-local {
+    font-size: 1.5rem;
+    padding: 6px;
+    border-radius: 20px;
+  }
+
+  .tabela-container {
+    width: 100%;
+    border-radius: 20px;
+    box-shadow: none;
+    overflow-x: auto;
+  }
+
+  .tabela-scroll {
+    max-height: 400px;
+  }
+
+  table {
+    font-size: 0.85rem;
+    min-width: 600px; /* evita quebra de colunas */
+  }
+
+  th, td {
+    padding: 8px;
+    min-width: 100px;
+    font-size: 0.85rem;
+  }
+
+  button {
+    padding: 4px 6px;
+    font-size: 0.8rem;
+  }
+
+  input[type="text"],
+  input[type="date"],
+  input[type="time"] {
+    font-size: 0.85rem;
+    padding: 6px;
+  }
+
+  .numero-carga {
+    font-size: 1rem;
+    padding: 4px 8px;
+    margin: 4px;
+  }
+}
