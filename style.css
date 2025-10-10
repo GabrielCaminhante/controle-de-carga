@@ -1,14 +1,8 @@
 /* Reset básico */
 * {
-  margin: 1px;
-  padding: 1px;
+  margin: 0px;
+  padding: 0px;
   box-sizing: border-box;
-}
-
-/* Área de rolagem da tabela */
-.tabela-scroll {
-  max-height: 600px;
-  overflow-y: auto;
 }
 
 /* Corpo da página */
@@ -25,9 +19,9 @@ body {
   padding: 5px;
   font-family: 'Segoe UI', 'Roboto', sans-serif;
   font-size: 2rem;
-  font-weight: 900;
+  font-weight: 1000;
   color: #ff6b6b;
-  text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+  text-shadow: 2px 2px 2px rgba(0,0,0,0.2);
   text-align: center;
   background-color: #f4f4f4;
   border-radius: 30px;
@@ -35,14 +29,27 @@ body {
 
 /* Container da tabela */
 .tabela-container {
-  max-height: 400px;
+  max-height: 1000px;
   overflow-y: auto;
   max-width: 1000px;
   margin: auto;
   background-color: #fff;
-  padding: 0  0  0  0;
+  padding: 0;
   border-radius: 30px;
   box-shadow: 0 0 15px rgba(0,0,0,0.1);
+}
+
+/* Área de rolagem da tabela */
+.tabela-scroll {
+  max-height: 600px;
+  overflow-y: auto;
+}
+
+/* Tabela */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #e4e4e4;
 }
 
 /* Cabeçalho fixo da tabela */
@@ -56,20 +63,25 @@ body {
   font-weight: bold;
   padding: 12px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  line-height: 1.4;
+  min-height: 40px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-/* Tabela */
-table {
-  width: 100%;
-  border-collapse: collapse;
-  background-color: #e4e4e4;
-}
-
+/* Células da tabela */
 th, td {
   padding: 12px;
   text-align: left;
   border-bottom: 1px solid #ddd;
+  line-height: 1.4;
+  min-height: 40px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
+
 
 /* Inputs */
 input[type="text"],
@@ -83,7 +95,7 @@ input[type="time"] {
 
 /* Botões */
 button {
-  padding: 6px 12px;
+  padding: 2px 4px;
   background-color: #28a745;
   color: white;
   border: none;
@@ -95,21 +107,12 @@ button:hover {
   background-color: #218838;
 }
 
-.botao-reset {
-  margin-top: 20px;
-  background-color: #dc3545;
-}
-
-.botao-reset:hover {
-  background-color: #c82333;
-}
-
-button:nth-child(2) {
+button:nth-child(3) {
   margin-left: 6px;
   background-color: #ffc107;
 }
 
-button:nth-child(2):hover {
+button:nth-child(1):hover {
   background-color: #e0a800;
 }
 
@@ -125,13 +128,13 @@ button:nth-child(2):hover {
 
 .carga-atual .numero-carga {
   position: relative;
-  font-size: 1.2em;
+  font-size: 1.2rem;
   background: linear-gradient(45deg, #ff6b6b, #f7d794);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   animation: pulse 2s infinite;
   padding: 2px 10px;
-  border-radius: 10px;
+  border-radius: 50px;
   border: 2px solid #ffc107;
   text-align: center;
   display: inline-block;
@@ -173,79 +176,3 @@ button:nth-child(2):hover {
   font-weight: bold;
 }
 
-/* Ícone de laranja animado */
-.laranja-icon {
-  display: inline-block;
-  animation: girar 3s infinite linear;
-}
-
-@keyframes girar {
-  0% {
-    transform: scale(1);
-    box-shadow: 0 0 6px rgba(255, 87, 34, 0.5);
-  }
-  50% {
-    transform: scale(1.1);
-    box-shadow: 0 0 16px rgba(25, 235, 59, 0.9);
-  }
-  100% {
-    transform: scale(1);
-    box-shadow: 0 0 6px rgba(55, 87, 34, 0.5);
-  }
-}
-@media (max-width: 768px) {
-  .titulo-local {
-    font-size: 1.5rem;
-    padding: 15px 10px;
-  }
-
-  .tabela-container {
-    padding: 10px;
-    border-radius: 15px;
-    max-height: 300px;
-  }
-
-  table {
-    font-size: 0.9rem;
-  }
-
-  th, td {
-    padding: 8px;
-  }
-
-  input[type="text"],
-  input[type="date"],
-  input[type="time"] {
-    padding: 6px;
-    font-size: 0.9rem;
-  }
-
-  button {
-    padding: 6px 10px;
-    font-size: 0.9rem;
-  }
-
-  .numero-carga {
-    font-size: 1rem;
-    padding: 2px 8px;
-  }
-}
-
-@media (max-width: 480px) {
-  .titulo-local {
-    font-size: 1.2rem;
-  }
-
-  table {
-    font-size: 0.8rem;
-  }
-
-  th, td {
-    padding: 6px;
-  }
-
-  button {
-    font-size: 0.8rem;
-    padding: 5px 8px;
-  }
-}
