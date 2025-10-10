@@ -1,83 +1,74 @@
 /* Reset básico */
 * {
-  margin: 0;
-  padding: 0;
+  margin: 1px;
+  padding: 1px;
   box-sizing: border-box;
 }
 
+/* Área de rolagem da tabela */
 .tabela-scroll {
-  max-height: 300px; /* altura visível da tabela */
+  max-height: 600px;
   overflow-y: auto;
 }
 
-
+/* Corpo da página */
 body {
   font-family: 'Segoe UI', sans-serif;
   background-color: #f4f4f4;
   padding: 20px;
 }
 
-/* TÍTULO FIXO NO TOPO */
+/* Título fixo */
 .titulo-local {
   position: sticky;
-  top: 0;
-  border-radius: 30px;
-  background-color: #f4f4f4;
   z-index: 100;
-  padding: 20px 0;
+  padding: 5px;
   font-family: 'Segoe UI', 'Roboto', sans-serif;
   font-size: 2rem;
-  font-weight: 800;
+  font-weight: 900;
   color: #ff6b6b;
   text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
   text-align: center;
+  background-color: #f4f4f4;
+  border-radius: 30px;
 }
 
-/* CONTAINER COM ROLAGEM DO CORPO DA TABELA */
+/* Container da tabela */
 .tabela-container {
   max-height: 400px;
   overflow-y: auto;
   max-width: 1000px;
   margin: auto;
   background-color: #fff;
-  padding: 0 10px 10px 10px;
+  padding: 0  0  0  0;
   border-radius: 30px;
   box-shadow: 0 0 15px rgba(0,0,0,0.1);
 }
 
-/* CABEÇALHO FIXO DA TABELA */
+/* Cabeçalho fixo da tabela */
 #tabela-cargas thead th {
   position: sticky;
-  top: 0px; /* altura do título fixo */
+  top: 0;
+  z-index: 99;
   background-color: #ff6b6b;
   color: white;
   text-align: center;
   font-weight: bold;
   padding: 12px;
-  z-index: 99;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 /* Tabela */
 table {
-  background-color: #e4e4e4;;
   width: 100%;
   border-collapse: collapse;
-}
-
-thead th {
-  background-color: #ff6b6b8f;
-  color: white;
-  text-align: center;
-  font-family: 'Segoe UI', sans-serif;
-  font-weight: bold;
-  padding: 12px;
+  background-color: #e4e4e4;
 }
 
 th, td {
   padding: 12px;
   text-align: left;
-  border-bottom: transparent;
+  border-bottom: 1px solid #ddd;
 }
 
 /* Inputs */
@@ -113,9 +104,18 @@ button:hover {
   background-color: #c82333;
 }
 
+button:nth-child(2) {
+  margin-left: 6px;
+  background-color: #ffc107;
+}
+
+button:nth-child(2):hover {
+  background-color: #e0a800;
+}
+
 /* Estados visuais */
 .saida-realizada {
-  background-color: #d4edda; /* verde claro */
+  background-color: #d4edda;
 }
 
 .carga-atual {
@@ -128,20 +128,20 @@ button:hover {
   font-size: 1.2em;
   background: linear-gradient(45deg, #ff6b6b, #f7d794);
   -webkit-background-clip: text;
-  -webkit-text-fill-color: background-clip;
+  -webkit-text-fill-color: transparent;
   animation: pulse 2s infinite;
-  font-weight: bold;
   padding: 2px 10px;
   border-radius: 10px;
   border: 2px solid #ffc107;
   text-align: center;
   display: inline-block;
   box-shadow: 0 0 2px rgba(255, 193, 7, 0.6);
-  margin:  auto; /* centraliza horizontalmente */
+  margin: auto;
   top: 15px;
   left: 20px;
 }
 
+/* Animação de pulso */
 @keyframes pulse {
   0% {
     transform: scale(1);
@@ -157,6 +157,7 @@ button:hover {
   }
 }
 
+/* Pulou vez */
 .pulou-vez {
   background-color: #f8d7da;
 }
@@ -171,15 +172,8 @@ button:hover {
   background-color: #e2e3e5;
   font-weight: bold;
 }
-button:nth-child(2) {
-  margin-left: 6px;
-  background-color: #ffc107;
-}
 
-button:nth-child(2):hover {
-  background-color: #e0a800;
-}
-
+/* Ícone de laranja animado */
 .laranja-icon {
   display: inline-block;
   animation: girar 3s infinite linear;
@@ -197,5 +191,61 @@ button:nth-child(2):hover {
   100% {
     transform: scale(1);
     box-shadow: 0 0 6px rgba(55, 87, 34, 0.5);
+  }
+}
+@media (max-width: 768px) {
+  .titulo-local {
+    font-size: 1.5rem;
+    padding: 15px 10px;
+  }
+
+  .tabela-container {
+    padding: 10px;
+    border-radius: 15px;
+    max-height: 300px;
+  }
+
+  table {
+    font-size: 0.9rem;
+  }
+
+  th, td {
+    padding: 8px;
+  }
+
+  input[type="text"],
+  input[type="date"],
+  input[type="time"] {
+    padding: 6px;
+    font-size: 0.9rem;
+  }
+
+  button {
+    padding: 6px 10px;
+    font-size: 0.9rem;
+  }
+
+  .numero-carga {
+    font-size: 1rem;
+    padding: 2px 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .titulo-local {
+    font-size: 1.2rem;
+  }
+
+  table {
+    font-size: 0.8rem;
+  }
+
+  th, td {
+    padding: 6px;
+  }
+
+  button {
+    font-size: 0.8rem;
+    padding: 5px 8px;
   }
 }
