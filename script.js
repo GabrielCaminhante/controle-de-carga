@@ -31,13 +31,13 @@ function marcarSaida(botao) {
   if (!linha.classList.contains("carga-atual") && !linha.classList.contains("pulou-vez")) return;
 
   const confirmar = confirm("⚠ Atenção!\nAo confirmar, esta linha será travada e não poderá ser editada até o reset da lista.\nDeseja continuar?");
-  if (!confirmar) return; // Se cancelar, nada acontece
+  if (!confirmar) return;
 
   linha.classList.add("saida-realizada");
   linha.classList.remove("carga-atual", "pulou-vez");
   removerAlerta(linha);
-
   desativarLinha(linha);
+
   atualizarCargaAtual(numeroLinha + 1);
 }
 
@@ -62,10 +62,21 @@ function pularCarga(botao) {
 function atualizarCargaAtual(numero) {
   document.querySelectorAll(".carga-atual").forEach(el => el.classList.remove("carga-atual"));
 
-  const proxima = [...tabelaCarregamento.rows].find(row => parseInt(row.dataset.numero) === numero);
-  if (proxima) proxima.classList.add("carga-atual");
+  const linhas = [...tabelaCarregamento.rows];
+  let proxima = numero;
 
-  aplicarRegrasDeBloqueio(numero);
+  while (proxima <= linhas.length) {
+    const linha = linhas.find(row => parseInt(row.dataset.numero) === proxima);
+    if (linha && !linha.classList.contains("saida-realizada")) {
+      linha.classList.add("carga-atual");
+      aplicarRegrasDeBloqueio(proxima);
+      return;
+    }
+    proxima++;
+  }
+
+  // Se não encontrar nenhuma linha válida, remove marcador
+  aplicarRegrasDeBloqueio(-1);
 }
 
 // Aplica regras de bloqueio e ativação de botões
@@ -111,7 +122,7 @@ function adicionarAlerta(linha) {
   const celulas = linha.querySelectorAll("td");
   const aviso = document.createElement("div");
   aviso.className = "alerta-pulou";
-  aviso.textContent = "⚠ Pulou a vez,Carga com pendência";
+  aviso.textContent = "⚠ Pendência";
   celulas[celulas.length - 1].appendChild(aviso);
 }
 
