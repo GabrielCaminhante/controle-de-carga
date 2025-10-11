@@ -1,7 +1,7 @@
 /* Reset básico */
 * {
-  margin: 0px;
-  padding: 0px;
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
 }
 
@@ -12,14 +12,8 @@ body {
   padding: 20px;
 }
 
-
 /* Título fixo */
 .titulo-local {
-  top: 0px;
-  margin: 0;
-  z-index: 100;
-  padding: 2px;
-  font-family: 'Segoe UI', 'Roboto', sans-serif;
   font-size: 2rem;
   font-weight: 600;
   color: #ff6b6b;
@@ -27,19 +21,20 @@ body {
   text-align: center;
   background-color: #f4f4f4;
   border-radius: 30px;
+  padding: 2px;
+  z-index: 100;
 }
 
 /* Container da tabela */
 .tabela-container {
   width: 100%;
   max-width: 100%;
-  overflow-x: auto;
   margin: auto;
   background-color: #ddd;
   padding: 0;
   border-radius: 30px;
   box-shadow: 0 0 15px rgba(0,0,0,0.1);
-  -webkit-overflow-scrolling: touch;
+  overflow-x: auto;
 }
 
 /* Área de rolagem da tabela */
@@ -51,14 +46,14 @@ body {
 /* Tabela */
 table {
   width: 100%;
-  table-layout: auto; /* permite que as colunas se ajustem automaticamente */
   border-collapse: collapse;
+  table-layout: auto;
 }
 
-/* Cabeçalho fixo da tabela */
+/* Cabeçalho fixo */
 #tabela-cargas thead th {
   position: sticky;
-  top: 0px; 
+  top: 0;
   z-index: 99;
   background-color: #ff6b6b;
   color: white;
@@ -66,26 +61,20 @@ table {
   font-weight: bold;
   padding: 12px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  line-height: 1.4;
-  min-height: 40px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-/* Células da tabela */
+/* Células */
 th, td {
   padding: 12px;
-  text-align: left;
-  word-break: break-word;
+  text-align: center;
   border-bottom: 1px solid #ddd;
-  line-height: 1.4;
-  min-height: 40px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
-
 
 /* Inputs */
 input[type="text"],
@@ -111,7 +100,7 @@ button:hover {
   background-color: #218838;
 }
 
-button:nth-child(3) {
+button:nth-child(2) {
   margin-left: 6px;
   background-color: #ffc107;
 }
@@ -122,7 +111,11 @@ button:nth-child(1):hover {
 
 /* Estados visuais */
 .saida-realizada {
-  background-color: ##ff6b6b;
+  background-color: #acffb2;
+}
+
+.pulou-vez {
+  background-color: #ffa3a3;
 }
 
 .carga-atual {
@@ -132,19 +125,16 @@ button:nth-child(1):hover {
 
 .carga-atual .numero-carga {
   display: flex;
-  justify-content: center;      /* Centraliza horizontalmente */
-  align-items: center;          /* Centraliza verticalmente */
+  justify-content: center;
+  align-items: center;
   font-size: 1.2rem;
   animation: pulse 2s infinite;
-  padding: 1px 1px;
+  padding: 1px;
   border-radius: 50px;
   border: 1px solid #ffc107;
-  box-shadow: 3 6 12px rgba(255, 193, 7, 0.6);
   background-color: #fffbe6;
   color: black;
-  margin-left: 10px;
-  margin-top: 10px;
-  margin-right: 10px;
+  margin: 10px;
 }
 
 /* Animação de pulso */
@@ -163,64 +153,26 @@ button:nth-child(1):hover {
   }
 }
 
-/* Pulou vez */
-.pulou-vez {
-  background-color: #f8d7da;
-}
-
+/* Alertas */
 .alerta-pulou {
   color: #721c24;
   font-size: 0.9em;
   margin-top: 4px;
 }
 
+.alerta-saida {
+  color: #155724;
+  font-size: 0.9em;
+  margin-top: 4px;
+}
+
+/* Linha fixa */
 .linha-fixa {
   background-color: #e2e3e5;
   font-weight: bold;
 }
 
-/* Coluna 1: Data */
-#tabela-cargas th:nth-child(1),
-#tabela-cargas td:nth-child(1) {
-  text-align: center;
-  vertical-align: middle;
-}
-
-/* Coluna 2: Cliente */
-#tabela-cargas th:nth-child(2),
-#tabela-cargas td:nth-child(2) {
-  text-align: center;
-  vertical-align: middle;
-}
-
-/* Coluna 3: Motorista */
-#tabela-cargas th:nth-child(3),
-#tabela-cargas td:nth-child(3) {
-  text-align: center;
-  vertical-align: middle;
-}
-
-/* Coluna 4: Horário de Saída */
-#tabela-cargas th:nth-child(4),
-#tabela-cargas td:nth-child(4) {
-  text-align: center;
-  vertical-align: middle;
-}
-
-/* Coluna 5: N° Carga */
-#tabela-cargas th:nth-child(5),
-#tabela-cargas td:nth-child(5) {
-  text-align: center;
-  vertical-align: middle;
-}
-
-/* Coluna 6: Marcar ação */
-#tabela-cargas th:nth-child(6),
-#tabela-cargas td:nth-child(6) {
-  text-align: center;
-  vertical-align: middle;
-}
-
+/* Cabeçalho de controle */
 .cabecalho-controle {
   position: relative;
   text-align: center;
@@ -230,17 +182,17 @@ button:nth-child(1):hover {
   z-index: 100;
 }
 
+/* Botão de reset */
 #botao-reset {
   position: fixed;
   top: 60px;
-  right: 20px; /* ← alterado de left para right */
-  padding: 2px 80px;
+  right: 20px;
+  padding: 8px 20px;
   background-color: #f4f4f4;
   color: #ff6b6b;
-  border: none;
+  border: 2px solid #f4f4f4;
   border-radius: 6px;
   font-weight: bold;
   cursor: pointer;
   z-index: 1000;
 }
-
