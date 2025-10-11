@@ -184,7 +184,7 @@ button:nth-child(1):hover {
 
 /* Botão de reset */
 #botao-reset {
-  position: fixed;
+  position: sticky;
   top: 60px;
   right: 20px;
   padding: 8px 20px;
@@ -196,3 +196,4 @@ button:nth-child(1):hover {
   cursor: pointer;
   z-index: 1000;
 }
+
