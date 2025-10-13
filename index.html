@@ -1,40 +1,108 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
+<!DOCTYPE html> <!-- Declara o tipo de documento como HTML5 -->
+<html lang="pt-BR"> <!-- Define o idioma da página como português do Brasil -->
 <head>
-  <meta charset="UTF-8">
-  <title>Controle de Cargas</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8"> <!-- Define a codificação de caracteres como UTF-8 para suportar acentuação -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> /* ajusta visual para dispositivos menores  */
+  <title>Controle de Cargas</title> <!-- Título da aba do navegador -->
+  <link rel="stylesheet" href="style.css"> <!-- Importa o arquivo de estilos CSS externo -->
 </head>
-<body>
-
-  <!-- TABELA DE CONTROLE DE CARGAS -->
-   
-  <div class="cabecalho-controle">
-  <h1 class="titulo-local">Controle de Cargas Braspolpa 🍊</h1>
-  <button onclick="resetarTabela()" id="botao-reset">🔁 Resetar Tabela</button>
-</div>
-</div>
-  <div class="tabela-container">
-    <div class="tabela-scroll">
-  <table id="tabela-cargas">
-    <thead>
-      <tr>
-        <th>Data</th>
-        <th>Cliente</th>
-        <th>Motorista</th>
-        <th>Horário de Saída</th>
-        <th>N° Carga</th>
-        <th>Marcar ação</th>
-      </tr>
-    </thead>
-    <tbody id="tabela-carregamento">
-      <!-- Linhas geradas via JavaScript -->
-    </tbody>
-    </table>
+<body> <!-- Início do corpo da página --> <!-- 🔶 SEÇÃO: TABELA DE CONTROLE DE CARGAS -->
+  <div class="cabecalho-controle"> <!-- Cabeçalho com título e botões de ação -->
+    <h1 class="titulo-local">🍊Controle de Cargas Braspolpa 🍊</h1> <!-- Título principal da página -->
+    <div class="botoes-controle"> <!-- Botões de controle da tabela de cargas -->
+      <button onclick="resetarTabela()">🔁 Resetar Tabela</button> <!-- Botão para resetar a tabela (função definida no script.js) -->
+      <button onclick="habilitarEdicaoTransportadoras()">✏️ Editar Transportadoras</button> <!-- Botão para liberar edição dos campos de transportadora -->
+      <button onclick="salvarTransportadoras()">💾 Salvar Transportadoras</button> <!-- Botão para salvar os dados das transportadoras -->
+    </div>
   </div>
-</div>
+  <div class="tabela-container"> <!-- Container com estilo e rolagem horizontal -->
+    <div class="tabela-scroll"> <!-- Área com rolagem vertical para a tabela -->
+      <table id="tabela-cargas"> <!-- Tabela de controle de cargas com ID para manipulação via JavaScript -->
+        <thead> <!-- Cabeçalho da tabela -->
+          <tr>
+            <th>Data</th>          <!-- Colunas da tabela -->           
+            <th>Cliente</th>
+            <th>Motorista</th>
+            <th>Horário de Saída</th>
+            <th>N° Carga</th>
+            <th>Marcar ação</th>   <!-- Colunas da tabela -->
+          </tr>
+        </thead>
+        <tbody id="tabela-carregamento"> <!-- Corpo da tabela onde as linhas serão geradas dinamicamente via JavaScript -->
+        </tbody>
+      </table>
+    </div>
+  </div> 
+    <h2 class="titulo-local"> Agendamento Semanal de Carretas</h2> <!-- Subtítulo da segunda tabela --> <!-- 🔷 SEÇÃO: AGENDAMENTO SEMANAL DE CARRETAS -->
+  <div class="botoes-agendamento"> <!-- Botão específico para salvar os dados da tabela de agendamento -->
+    <button onclick="agendarCarregamentoCarretas()">📦 Agendar Carregamento das Carretas</button>
+  </div>
+  <div class="tabela-container"> <!-- Container da segunda tabela com mesmo estilo -->
+    <div class="tabela-scroll"> 
+      <table id="tabela-agendamento-semanal"> <!-- Tabela de agendamento com ID próprio -->
+        <thead> 
+          <tr> <!-- Cabeçalho com os dias da semana -->
+            <th>Transportadora</th>
+            <th>Segunda</th>
+            <th>Terça</th>
+            <th>Quarta</th>
+            <th>Quinta</th>
+            <th>Sexta</th>
+            <th>Sábado</th>
+            <th>Domingo</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Corpo da tabela com 4 linhas de exemplo -->
+          <!-- Cada linha representa uma transportadora com campos de horário para cada dia -->
+          <tr>
+            <td><input type="text" class="campo-transportadora" value="Transportadora" disabled></td>
+            <!-- Campo de texto para nome da transportadora (bloqueado por padrão) -->
+            <td><input type="time"></td> <!-- Segunda -->
+            <td><input type="time"></td> <!-- Terça -->
+            <td><input type="time"></td> <!-- Quarta -->
+            <td><input type="time"></td> <!-- Quinta -->
+            <td><input type="time"></td> <!-- Sexta -->
+            <td><input type="time"></td> <!-- Sábado -->
+            <td><input type="time"></td> <!-- Domingo -->
+          </tr>
+          <!-- Repetição da estrutura para mais transportadoras -->
+          <tr>
+            <td><input type="text" class="campo-transportadora" value="Transportadora" disabled></td>
+            <td><input type="time"></td>
+            <td><input type="time"></td>
+            <td><input type="time"></td>
+            <td><input type="time"></td>
+            <td><input type="time"></td>
+            <td><input type="time"></td>
+            <td><input type="time"></td>
+          </tr>
+          <tr>
+            <td><input type="text" class="campo-transportadora" value="Transportadora" disabled></td>
+            <td><input type="time"></td>
+            <td><input type="time"></td>
+            <td><input type="time"></td>
+            <td><input type="time"></td>
+            <td><input type="time"></td>
+            <td><input type="time"></td>
+            <td><input type="time"></td>
+          </tr>
+          <tr>
+            <td><input type="text" class="campo-transportadora" value="Transportadora" disabled></td>
+            <td><input type="time"></td>
+            <td><input type="time"></td>
+            <td><input type="time"></td>
+            <td><input type="time"></td>
+            <td><input type="time"></td>
+            <td><input type="time"></td>
+            <td><input type="time"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <!-- 🔧 SCRIPT -->
   <script src="script.js"></script>
+  <!-- Importa o arquivo JavaScript com as funções de controle da página -->
 </body>
 </html>
-
-
