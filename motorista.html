@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Painel do Motorista</title>
+  <link rel="stylesheet" href="motorista.css" />
+</head>
+<body>
+  <div id="lista-motoristas-cadastrados"></div>
+  <div class="painel-fixo">
+  <h1 class="titulo-motorista">
+    Marque a sua vez e acompanhe na fila de carregamento. 🚛
+  </h1>
+  <div id="alerta-carretas" class="alerta-carretas">
+    
+    <!-- O alerta será inserido aqui dinamicamente -->
+  </div>
+</div>
+
+  <div class="tabela-container">
+    <table id="tabela-motorista">
+      <thead>
+        <tr>
+          <th>Transportadoras</th>
+          <th>Motoristas</th>
+          <th>Horário de Saída</th>
+          <th>N° Cargas</th>
+          <th>Ação</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Linhas geradas via JS -->
+      </tbody>
+    </table>
+  </div>
+
+  <script src="motorista.js"></script>
+</body>
+</html>

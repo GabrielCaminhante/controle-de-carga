@@ -1,0 +1,312 @@
+/* Reset básico */
+* {
+  margin-top: -5px;
+  padding: -2px;
+  box-sizing: border-box;
+}
+
+/* Corpo da página */
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f4f4f4;
+  padding: 2px;
+}
+
+/* Título fixo */
+.titulo-local {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #ff6b6b;
+  text-shadow: 4px 4px 4px rgba(0,0,0,0.2);
+  text-align: center;
+  background-color: #f4f4f4;
+  border-radius: 30px;
+  padding: 0px;
+  z-index: 100;
+}
+
+/* Container da tabela */
+.tabela-container {
+  width: 100%;
+  max-width: 100%;
+  margin: auto;
+  background-color: #ddd;
+  padding: 0;
+  border-radius: 30px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.1);
+  overflow-x: auto;
+}
+
+/* Área de rolagem da tabela */
+.tabela-scroll {
+  max-height: 460px;
+  overflow-y: auto;
+}
+
+/* Tabela */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: auto;
+}
+
+/* Cabeçalho fixo da tabela de cargas */
+#tabela-cargas thead th {
+  position: sticky;
+  top: 0;
+  z-index: 99;
+  background-color: #ff6b6b;
+  color: white;
+  text-align: center;
+  font-weight: bold;
+  padding: 12px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Células */
+th,
+td {
+  padding: 12px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Inputs */
+input[type="text"],
+input[type="date"],
+input[type="time"] {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+/* Botões padrão */
+button {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  font-size: 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin: 6px;
+}
+
+button:hover {
+  background-color: #e46d6d;
+}
+
+/* Estados visuais da tabela de cargas */
+.saida-realizada {
+  background-color: #acffb2;
+}
+
+.pulou-vez {
+  background-color: #ffa3a3;
+}
+
+.carga-atual {
+  background-color: #fff3cd;
+  font-weight: bold;
+}
+
+/* Estilo do número da carga atual */
+.carga-atual .numero-carga {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+  animation: pulse 2s infinite;
+  padding: 10px;
+  border-radius: 50px;
+  border: 0px solid #ffc107;
+  background-color: #fffbe6;
+  color: black;
+  margin: 15px;
+}
+
+/* Animação de pulso */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 6px rgba(255, 87, 34, 0.5);
+  }
+  50% {
+    transform: scale(1.1);
+    box-shadow: 0 0 16px rgba(25, 235, 59, 0.9);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 6px rgba(55, 87, 34, 0.5);
+  }
+}
+
+/* Alertas */
+.alerta-pulou {
+  color: #721c24;
+  font-size: 0.9em;
+  margin-top: 4px;
+}
+
+.alerta-saida {
+  color: #155724;
+  font-size: 0.9em;
+  margin-top: 4px;
+}
+
+/* Linha fixa */
+.linha-fixa {
+  background-color: #e2e3e5;
+  font-weight: bold;
+}
+
+/* Cabeçalho de controle */
+.cabecalho-controle {
+  position: relative;
+  text-align: center;
+  background-color: #f4f4f4;
+  padding: 20px;
+  border-radius: 30px;
+  z-index: 100;
+}
+
+/* Botão de reset fixo */
+#botao-reset {
+  position: sticky;
+  top: 60px;
+  right: 20px;
+  padding: 8px 20px;
+  background-color: #f4f4f4;
+  color: #ff6b6b;
+  border: 2px solid #f4f4f4;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 1000;
+}
+
+/* Tabela de agendamento semanal */
+#tabela-agendamento-semanal {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 0px;
+}
+
+#tabela-agendamento-semanal th,
+#tabela-agendamento-semanal td {
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: center;
+  background-color: #fff;
+}
+
+#tabela-agendamento-semanal th {
+  background-color: #ff6b6b;
+  color: white;
+  font-weight: bold;
+}
+
+/* Inputs da tabela de agendamento */
+#tabela-agendamento-semanal input[type="text"],
+#tabela-agendamento-semanal input[type="date"],
+#tabela-agendamento-semanal input[type="time"] {
+  width: 100%;
+  padding: 6px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+@media (max-width: 600px) {
+  /* Corrige o reset */
+  * {
+    margin-top: 0;
+    padding: 0;
+  }
+
+  body {
+    padding: 10px;
+  }
+
+  .titulo-local {
+    font-size: 1.5rem;
+    padding: 8px;
+    margin-bottom: 20px;
+  }
+
+  .tabela-container {
+    border-radius: 15px;
+    padding: 10px;
+    overflow-x: auto;
+  }
+
+  .tabela-scroll {
+    max-height: 360px;
+  }
+
+  table {
+    font-size: 0.8rem;
+    min-width: 600px; /* permite rolagem horizontal */
+  }
+
+  th, td {
+    padding: 8px;
+  }
+
+  input[type="text"],
+  input[type="date"],
+  input[type="time"] {
+    font-size: 0.85rem;
+    padding: 6px;
+  }
+
+  button {
+    font-size: 0.85rem;
+    padding: 6px 10px;
+    margin: 4px;
+    width: 100%;
+  }
+
+  .carga-atual .numero-carga {
+    font-size: 1rem;
+    padding: 8px;
+    margin: 10px;
+  }
+
+  .cabecalho-controle {
+    padding: 15px;
+  }
+
+  #botao-reset {
+    top: 10px;
+    right: 10px;
+    padding: 6px 12px;
+    font-size: 0.85rem;
+  }
+
+  #tabela-agendamento-semanal {
+    font-size: 0.8rem;
+    min-width: 600px;
+  }
+
+  #tabela-agendamento-semanal th,
+  #tabela-agendamento-semanal td {
+    padding: 6px;
+  }
+
+  #tabela-agendamento-semanal input[type="text"],
+  #tabela-agendamento-semanal input[type="date"],
+  #tabela-agendamento-semanal input[type="time"] {
+    font-size: 0.85rem;
+    padding: 5px;
+  }
+}
+
+

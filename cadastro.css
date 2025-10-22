@@ -1,0 +1,237 @@
+/* 🌐 Layout geral */
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f4f4f4;
+  color: #333;
+  padding: 30px;
+}
+
+/* 🏷️ Título principal da página */
+.titulo-principal {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #ff6b6b;
+  text-align: center;
+  background-color: #f4f4f4;
+  border-radius: 30px;
+  padding: 10px;
+  text-shadow: 4px 4px 6px rgba(0, 0, 0, 0.2);
+  margin-bottom: 30px;
+}
+
+/* 📋 Painel de cadastro otimizado */
+.painel-cadastro {
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 30px 20px;
+  margin: 0 auto 40px auto;
+  width: 100%;
+  max-width: 800px; /* 🔧 aumentamos de 600px para 700px */
+  border: 2px solid #ff6b6b;
+  box-sizing: border-box;
+}
+
+/* 🧾 Títulos internos do painel */
+.painel-cadastro h2 {
+  color: #ff6b6b;
+  font-size: 1.4rem;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.1);
+  font-weight: 800;
+}
+
+/* 🧾 Labels e campos */
+.painel-cadastro label {
+  display: block;
+  margin-top: 10px;
+  margin-bottom: 4px;
+  font-weight: bold;
+  color: #333;
+}
+
+.painel-cadastro input[type="text"],
+.painel-cadastro input[type="tel"] {
+  width: 100%;
+  padding: 8px;
+  font-size: 0.95rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+}
+
+/* 🔘 Botões de ação */
+.botoes-admin {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.botoes-admin button {
+  padding: 10px 18px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  min-width: 160px;
+}
+
+.botoes-admin button:hover {
+  background-color: #e46d6d;
+  transform: scale(1.05);
+}
+
+/* 📊 Painel de tabela de cadastros */
+.tabela-cadastrados {
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  padding: 20px;
+  margin: 0 auto 40px auto;
+  max-width: 760px;
+  border: 2px solid #e46d6d;
+}
+
+/* 🏷️ Título da seção de cadastros */
+.tabela-cadastrados h2 {
+  text-align: center;
+  color: #ff6b6b; /* mesma cor dos títulos principais */
+  font-size: 1.6rem;
+  margin-bottom: 20px;
+  font-weight: 700;
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.2); /* mesma sombra dos outros títulos */
+}
+
+.tabela-cadastrados h3 {
+  color: #ff6b6b;
+  font-size: 1.2rem;
+  margin-top: 30px;
+  margin-bottom: 10px;
+  font-weight: bold;
+  text-align: center;
+  text-shadow: 1px 1px 4px rgba(0,0,0,0.1);
+}
+
+/* 🧾 Tabela de motoristas cadastrados */
+.tabela-cadastrados table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  margin-bottom: 20px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.05); /* sombra leve como nas outras tabelas */
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+/* Cabeçalho da tabela */
+.tabela-cadastrados th {
+  background-color: #ff6b6b; /* mesma cor dos títulos principais */
+  color: white;
+  font-weight: bold;
+  padding: 8px;
+  border: 1px solid #ccc;
+  text-align: center;
+}
+
+/* Células da tabela */
+.tabela-cadastrados td {
+  border: 1px solid #ccc;
+  padding: 6px;
+  text-align: center;
+  background-color: #fff;
+}
+
+
+/* 🗑️ Botão de remover dentro da tabela */
+.tabela-cadastrados button {
+  padding: 6px 10px;
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.tabela-cadastrados button:hover {
+  background-color: #a71d2a;
+}
+
+
+@media (max-width: 600px) {
+  body {
+    padding: 15px;
+  }
+
+  .titulo-principal {
+    font-size: 1.5rem;
+    padding: 8px;
+    margin-bottom: 20px;
+  }
+
+  .painel-cadastro {
+    padding: 20px 15px;
+    margin: 20px auto;
+    max-width: 100%;
+  }
+
+  .painel-cadastro h2 {
+    font-size: 1.2rem;
+    text-align: center;
+  }
+
+  .painel-cadastro input[type="text"],
+  .painel-cadastro input[type="tel"] {
+    font-size: 0.9rem;
+  }
+
+  .botoes-admin {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .botoes-admin button {
+    width: 100%;
+    font-size: 0.9rem;
+    padding: 10px;
+    min-width: auto;
+  }
+
+  .tabela-cadastrados {
+    padding: 15px;
+    margin: 20px auto;
+    max-width: 100%;
+    overflow-x: auto;
+  }
+
+  .tabela-cadastrados h2,
+  .tabela-cadastrados h3 {
+    font-size: 1.2rem;
+  }
+
+  .tabela-cadastrados table {
+    font-size: 0.8rem;
+    min-width: 600px; /* permite rolagem horizontal se necessário */
+  }
+
+  .tabela-cadastrados th,
+  .tabela-cadastrados td {
+    padding: 6px 4px;
+  }
+
+  .tabela-cadastrados button {
+    font-size: 0.75rem;
+    padding: 5px 8px;
+  }
+}
+

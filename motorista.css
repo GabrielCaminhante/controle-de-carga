@@ -1,0 +1,270 @@
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Área fixa no topo */
+.painel-fixo {
+  position: sticky;
+  top: 0;
+  background-color: #f4f4f4;
+  z-index: 100;
+  padding-top: 10px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.titulo-motorista {
+  font-size: 2rem; /* Tamanho grande para destaque */
+  font-weight: 800; /* Negrito leve */
+  color: #ff6b6b; /* Cor vibrante para o título */
+  text-shadow: 4px 4px 4px rgba(0,0,0,0.2); /* Sombra suave para profundidade */
+  text-align: center; /* Centraliza o texto */
+  background-color: #f4f4f4; /* Fundo igual ao corpo */
+  border-radius: 30px; /* Bordas arredondadas */
+  padding: 10px; /* Espaço interno mínimo */
+  z-index: 100; /* Prioridade de empilhamento */
+}
+
+/* Corpo da página */
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f4f4f4;
+  padding: 20px;
+}
+
+/* Cabeçalho */
+.cabecalho {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.cabecalho h1 {
+  font-size: 1.8rem;
+  color: #ff6b6b;
+  margin-bottom: 6px;
+}
+
+.cabecalho p {
+  font-size: 1rem;
+  color: #333;
+}
+
+/* Área de rolagem da tabela */
+.tabela-container {
+  max-height: 800px; /* ou ajuste conforme sua tela */
+  overflow-y: auto;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+
+/* Cabeçalho fixo da tabela */
+#tabela-motorista thead th {
+  position: sticky;
+  top: 0;
+  background-color: #ff6b6b;
+  color: white;
+  font-weight: bold;
+  z-index: 99;
+}
+
+/* Tabela */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 12px;
+  border: 1px solid #ccc;
+  text-align: center;
+  vertical-align: middle;
+}
+
+/* Cabeçalho da tabela */
+th {
+  background-color: #ff6b6b;
+  color: white;
+  font-weight: bold;
+}
+
+input::placeholder {
+  color: #888;
+  font-style: italic;
+}
+
+/* Inputs */
+input[type="text"],
+input[type="time"] {
+  width: 100%;
+  padding: 6px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 0.95rem;
+}
+
+/* Botões */
+button {
+  padding: 6px 12px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #218838;
+}
+
+/* Alerta visual dentro da célula */
+.alerta-status {
+  margin-top: 6px;
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+/* ✅ Linha verde para carga OK */
+tr.saida-realizada {
+  background-color: #d4edda !important;
+}
+tr.saida-realizada .alerta-status {
+  color: #155724;
+}
+
+/* ⚠️ Linha vermelha para carga com pendência */
+tr.pulou-vez {
+  background-color: #f8d7da !important;
+}
+tr.pulou-vez .alerta-status {
+  color: #721c24;
+}
+
+/* ✳️ Linha amarela com animação para carga atual */
+tr.carga-atual {
+  background-color: #fff3cd !important;
+  font-weight: bold;
+  animation: pulse 2s infinite;
+}
+tr.carga-atual .alerta-status {
+  color: #856404;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 6px rgba(255, 193, 7, 0.5);
+  }
+  50% {
+    transform: scale(1.02);
+    box-shadow: 0 0 12px rgba(255, 193, 7, 0.9);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 6px rgba(255, 193, 7, 0.5);
+  }
+}
+
+/* Responsividade */
+@media screen and (max-width: 600px) {
+  th, td {
+    font-size: 0.85rem;
+    padding: 8px;
+  }
+
+  input[type="text"],
+  input[type="time"] {
+    font-size: 0.85rem;
+  }
+
+  button {
+    padding: 5px 10px;
+    font-size: 0.85rem;
+  }
+}
+
+/* ✅ 2. CSS: Estilo visual para o alerta */
+
+.alerta-carretas {
+  text-align: center;
+  background-color: #fffbe6;
+  border-left: 6px solid #ffc107;
+  padding: 12px 20px;
+  margin: 0 20px 20px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #333;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  animation: pulse 2s infinite;
+}
+
+@media screen and (max-width: 600px) {
+  body {
+    padding: 10px;
+  }
+
+  .painel-fixo {
+    padding-top: 6px;
+  }
+
+  .titulo-motorista {
+    font-size: 1.5rem;
+    padding: 8px;
+    border-radius: 20px;
+  }
+
+  .cabecalho h1 {
+    font-size: 1.4rem;
+  }
+
+  .cabecalho p {
+    font-size: 0.9rem;
+  }
+
+  .tabela-container {
+    max-height: 500px;
+    overflow-x: auto;
+    padding: 10px;
+    border-radius: 8px;
+  }
+
+  table {
+    font-size: 0.8rem;
+    min-width: 600px; /* permite rolagem horizontal */
+  }
+
+  th, td {
+    font-size: 0.75rem;
+    padding: 6px;
+  }
+
+  input[type="text"],
+  input[type="time"] {
+    font-size: 0.8rem;
+    padding: 5px;
+  }
+
+  button {
+    font-size: 0.8rem;
+    padding: 5px 8px;
+    width: 100%;
+    margin: 4px 0;
+  }
+
+  .alerta-status {
+    font-size: 0.8rem;
+    margin-top: 4px;
+  }
+
+  .alerta-carretas {
+    font-size: 0.9rem;
+    padding: 10px 15px;
+    margin: 0 10px 15px;
+  }
+}

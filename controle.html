@@ -1,0 +1,70 @@
+<!DOCTYPE html> <!-- Declara o tipo de documento como HTML5 -->
+<html lang="pt-BR"> <!-- Define o idioma da página como português do Brasil -->
+<head>
+  <meta charset="UTF-8"> <!-- Define a codificação de caracteres como UTF-8 para suportar acentuação -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- ajusta visual para dispositivos menores -->
+  <title>Controle de Cargas</title> <!-- Título da aba do navegador -->
+  <link rel="stylesheet" href="controle.css"> <!-- Importa o arquivo de estilos CSS externo -->
+</head>
+<body> <!-- Início do corpo da página --> <!-- 🔶 SEÇÃO: TABELA DE CONTROLE DE CARGAS -->
+  <datalist id="lista-motoristas"></datalist>
+  <div class="cabecalho-controle"> <!-- Cabeçalho com título e botões de ação -->
+    <h1 class="titulo-local">🍊Controle de Cargas Braspolpa 🍊</h1> <!-- Título principal da página -->
+    <div class="botoes-controle"> <!-- Botões de controle da tabela de cargas -->
+      <button id="botao-resetar" onclick="resetarTabelaControleDeCargas()" disabled>🔄 Resetar Cargas</button> <!-- Botão para resetar a tabela (função definida no script.js) -->
+      <button onclick="gerarPDFCargas()">📄 Gerar PDF da Tabela de Cargas</button>
+      <button onclick="abrirPainelMotorista()" class="botao-link"> Painel do Motorista 🚛</button> <!--Botão para link painel do motora-->
+      <button onclick="abrirPainelCadastro()">📝 Cadastro de Transportadoras e Motoristas</button>
+
+  </div>
+  </div>
+  <div class="tabela-container"> <!-- Container com estilo e rolagem horizontal -->
+    <div class="tabela-scroll"> <!-- Área com rolagem vertical para a tabela -->
+      <table id="tabela-cargas"> <!-- Tabela de controle de cargas com ID para manipulação via JavaScript -->
+        <thead> <!-- Cabeçalho da tabela -->
+          <tr>
+            <th>Data</th>          <!-- Colunas da tabela -->           
+            <th>Cliente</th>
+            <th>Motorista</th>
+            <th>Horário de Saída</th>
+            <th>N° Carga</th>
+            <th>Marcar ação</th>   <!-- Colunas da tabela -->
+          </tr>
+        </thead>
+        <tbody id="tabela-carregamento"> <!-- Corpo da tabela onde as linhas serão geradas dinamicamente via JavaScript -->
+        </tbody>
+      </table>
+    </div>
+  </div> 
+   <h2 class="titulo-local">Agendamento Semanal</h2>
+<div class="botoes-agendamento">
+</div>
+<div class="tabela-container">
+  <div class="tabela-scroll">
+    <table id="tabela-agendamento-semanal">
+      <thead>
+        <tr>
+          <th>Transportadora</th>
+          <th>Segunda</th>
+          <th>Terça</th>
+          <th>Quarta</th>
+          <th>Quinta</th>
+          <th>Sexta</th>
+          <th>Sábado</th>
+          <th>Domingo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Linhas serão geradas dinamicamente via JS -->
+      </tbody>
+    </table>
+  </div>
+</div>
+  <!-- 🔧 SCRIPT -->
+  <script src="controle.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <datalist id="lista-motoristas"></datalist>
+  <!-- Importa o arquivo JavaScript com as funções de controle da página -->
+</body>
+</html>

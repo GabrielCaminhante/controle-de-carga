@@ -1,0 +1,350 @@
+/* 🌐 Estilo geral da página */
+body {
+  font-family: 'Segoe UI', sans-serif; /* Fonte moderna e legível */
+  background-color: #f4f4f4;           /* Fundo neutro */
+  color: #333;                         /* Texto escuro */
+  padding: 30px;                       /* Espaçamento interno */
+}
+
+/* 🎯 Títulos principais */
+h1, h2, h3 {
+  text-align: center;
+  margin-bottom: 10px;
+  color: #ff6b6b;                      /* Cor de destaque */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Sombra suave */
+  font-weight: 800;
+}
+
+/* 🏷️ Título decorativo principal */
+.titulo-principal {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #ff6b6b;
+  text-align: center;
+  background-color: #f4f4f4;
+  border-radius: 30px;
+  padding: 10px;
+  text-shadow: 4px 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* 🔘 Botões principais agrupados */
+.botoes-gerais {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+  margin: 30px auto;
+  max-width: 1000px;
+}
+
+.botoes-gerais button {
+  padding: 10px 20px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.botoes-gerais button:hover {
+  background-color: #e46d6d;
+}
+
+/* 📦 Área de tabelas de cargas */
+#gridCargas {
+  display: flex;
+  flex-direction: column;
+  gap: 5px; /* ✅ Espaço reduzido entre blocos */
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* 📦 Linha com 3 blocos lado a lado */
+.linha-lotes {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+/* 📦 Bloco individual de carga */
+.tabela-bloco-carga {
+  background-color: white;
+  padding: 0px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  border-radius: 0px;
+  margin: 0 !important;
+}
+
+.tabela-bloco-carga h3 {
+  text-align: center;
+  margin: 4px 0;
+  font-size: 1rem;
+  color: #ff6b6b;
+}
+
+.tabela-bloco-carga table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  margin: 0;
+}
+
+.tabela-bloco-carga th,
+.tabela-bloco-carga td {
+  border: 1px solid #ccc;
+  padding: 6px;
+  text-align: center;
+  background-color: #fff;
+}
+
+.tabela-bloco-carga th {
+  background-color: #ff6b6b;
+  color: white;
+  font-weight: bold;
+}
+
+/* 🧾 Campos de entrada */
+.tabela-bloco-carga input[type="text"],
+.tabela-bloco-carga input[type="number"],
+.tabela-bloco-carga input[type="date"],
+.tabela-bloco-carga input[type="time"] {
+  width: 100%;
+  padding: 6px;
+  font-size: 0.9rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-sizing: border-box;
+}
+
+/* 📅 Tabela de agendamento semanal */
+.tabela-agendamento {
+  margin-top: 5px; /* ✅ Espaço reduzido entre seções */
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.tabela-agendamento h2 {
+  margin-bottom: 20px;
+  font-size: 1.2rem;
+  text-align: center;
+  color: #ff6b6b;
+}
+
+/* 🧭 Botões abaixo da tabela semanal */
+.botoes-admin {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.botoes-admin button {
+  padding: 8px 16px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.botoes-admin button:hover {
+  background-color: #e46d6d;
+}
+
+/* 📅 Estilo da tabela semanal */
+#tabela-semanal {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+#tabela-semanal th {
+  background-color: #ff6b6b;
+  color: white;
+  padding: 8px;
+  border: 1px solid #ccc;
+  text-align: center;
+}
+
+#tabela-semanal td {
+  border: 1px solid #ccc;
+  padding: 6px;
+  text-align: center;
+  background-color: #fff;
+}
+
+#tabela-semanal input[type="time"],
+#tabela-semanal input[type="text"],
+#tabela-semanal input[type="date"] {
+  width: 100%;
+  padding: 6px;
+  font-size: 0.9rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-sizing: border-box;
+}
+
+/* 🛠️ Painel do Administrador */
+.painel-administrador {
+  background-color: #fff;
+  border-bottom: 2px solid #ff6b6b;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  padding: 10px 20px;
+  margin: 0 auto 20px auto;     /* ✅ Centraliza o painel */
+  max-width: 1000px;            /* ✅ Igual à largura das tabelas */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.painel-administrador h2 {
+  margin-bottom: 15px; /* ✅ Separação do título e botões */
+  font-size: 1.6rem;
+  color: #ff6b6b;
+  text-shadow: 2px 2px 6px rgba(0,0,0,0.2);
+}
+
+/* 🔘 Botões do painel */
+.botoes-admin-panel {
+  position: sticky;
+  top: 0; /* distância do topo da tela */
+  display: flex;               /* Alinha os botões em linha */
+  flex-direction: row;
+  justify-content: flex-start; /* Alinhamento à esquerda */
+  gap: 5px;                    /* Espaço entre botões */
+  overflow-x: auto;            /* Rolagem horizontal se necessário */
+  padding: 10px 0;
+  max-width: 100%;
+  white-space: nowrap;         /* Impede quebra de linha */
+   z-index: 1000; /* garante que fique acima de outros elementos */
+}
+
+.botoes-admin-panel button {
+  flex: 0 0 auto;              /* Impede que os botões se estiquem */
+  padding: 6px 12px;
+  font-size: 0.85rem;
+  border: none;
+  border-radius: 6px;
+  background-color: #28a745;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  white-space: nowrap;
+}
+
+.botoes-admin-panel button:hover {
+  background-color: #e46d6d;
+}
+
+/* 📊 Painel de Estatísticas */
+.painel-estatisticas {
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  padding: 20px;
+  margin: 5px auto; /* ✅ Espaço reduzido entre seções */
+  max-width: 1000px;
+  border: 2px solid #007bff;
+}
+
+.painel-estatisticas h2 {
+  text-align: center;
+  color: #007bff;
+  font-size: 1.6rem;
+  margin-bottom: 20px;
+  font-weight: 1000;
+  text-shadow: 2px 2px 6px rgba(0,0,0,0.2);
+}
+
+#estatisticas-cargas p {
+  font-size: 1rem;
+  margin: 8px 0;
+}
+
+#por-transportadora p {
+  margin: 4px 0;
+}
+
+
+/* 📱 Responsividade para telas menores */
+@media (max-width: 600px) {
+  body {
+    padding: 15px;
+  }
+
+  .painel-administrador {
+    padding: 10px;
+  }
+
+  .botoes-admin-panel button,
+  .botoes-admin button,
+  .botoes-gerais button {
+    font-size: 0.85rem;
+    padding: 8px 12px;
+    min-width: auto;
+    width: auto; /* ✅ Evita botões ocuparem 100% da largura */
+  }
+
+  .botoes-admin-panel,
+  .botoes-admin,
+  .botoes-gerais {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .linha-lotes {
+    grid-template-columns: 1fr; /* ✅ Um bloco por linha em telas pequenas */
+  }
+
+  .tabela-bloco-carga table,
+  #tabela-semanal {
+    font-size: 0.8rem;
+  }
+
+
+  .painel-estatisticas {
+    padding: 15px;
+    margin: 20px auto;
+    width: 100%;
+  }
+
+  h1, h2, h3 {
+    font-size: 1.2rem;
+  }
+
+  .titulo-principal {
+    font-size: 1.5rem;
+    padding: 8px;
+  }
+
+  #gridCargas {
+    margin-top: 30px;
+    padding: 0 10px;
+  }
+
+  .tabela-agendamento {
+    padding: 15px;
+    margin-top: 30px;
+  }
+
+  #tabela-semanal th,
+  #tabela-semanal td {
+    padding: 4px;
+  }
+}
+
+

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cadastro de Transportadoras e Motoristas</title>
+  <link rel="stylesheet" href="cadastro.css" />
+</head>
+<body>
+  <main>
+    <!-- 🏷️ Título principal -->
+    <h1 class="titulo-principal">📝 Cadastro de Transportadoras e Motoristas</h1>
+
+    <!-- 📋 Painel de cadastro -->
+    <div class="painel-cadastro">
+      <form>
+        <h2>🚛 Transportadora</h2>
+        <label for="transportadora">Nome da Transportadora:</label>
+        <input type="text" id="transportadora" name="transportadora" placeholder="Ex: TransBraspolpa" required />
+
+        <h2> 👨‍ Motorista</h2>
+        <label for="motorista">Nome do Motorista:</label>
+        <input type="text" id="motorista" name="motorista" placeholder="Ex: GabrielOliveira" required />
+
+        <label for="contato">Número para contato:</label>
+        <input type="tel" id="contato" name="contato" placeholder=" (19) 995663758" required />
+
+        <div class="botoes-admin">
+          <button type="submit">💾 Salvar Cadastro</button>
+        </div>
+      </form>
+    </div>
+
+    <!-- 📊 Tabela dinâmica de cadastros -->
+    <div class="tabela-cadastrados">
+      <h2>📋 Transportadoras e Motoristas Cadastrados</h2>
+      <div id="tabela-dinamica"></div>
+    </div>
+  </main>
+
+  <!-- 🧠 Script para salvar e exibir dados -->
+  <script src="cadastro.js"></script>
+</body>
+</html>

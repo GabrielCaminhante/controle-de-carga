@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Painel do Administrador</title>
+  <link rel="stylesheet" href="admin.css" />
+
+  <!-- ✅ Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database.js"></script>
+</head>
+<body>
+   <h1>Painel do Administrador 🛠️</h1>
+  <div class="painel-administrador">
+   
+  <div class="botoes-admin-panel">
+    <button onclick="abrirControleDeCargas()">📦 Controle de Cargas</button>
+    <button onclick="abrirPainelMotorista()">🚚 Painel do Motorista</button>
+    <button onclick="adicionarLinha()">➕ Linha</button>
+    <input type="number" id="quantidade-linhas" placeholder="Qtd de linhas" min="1" style="width: 100px;">
+    <button onclick="removerUltimaLinha()">➖ Linha</button>
+    <button onclick="mostrarContador()">🔢 Contador</button>
+    <button onclick="zerarTransportadoras()">♻️ Zerar Transportadoras</button>
+    <button class="botao-final" onclick="abrirPainelCadastro()">📝 Cadastro de Transportadoras e Motoristas</button>
+</div>
+</div>
+  <!-- 📦 Tabela de Cargas -->
+  <section>
+    <div id="gridCargas"></div>
+  </section>
+  <!-- 📅 Tabela de Agendamento Semanal -->
+  <section class="tabela-agendamento">
+    <h1>Agendamento Semanal</h1>
+    <div class="botoes-admin">
+      <button onclick="adicionarLinhaAgendamento()">➕ Linha</button>
+      <button onclick="removerUltimaLinhaAgendamento()">➖ Linha</button>
+    </div>
+    <table id="tabela-semanal">
+      <thead>
+        <tr>
+          <th>Transportadora</th>
+          <th>Segunda</th>
+          <th>Terça</th>
+          <th>Quarta</th>
+          <th>Quinta</th>
+          <th>Sexta</th>
+          <th>Sábado</th>
+          <th>Domingo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- preenchido dinamicamente pelo JS -->
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ✅ Preenchimento automático -->
+  <datalist id="lista-transportadoras"></datalist>
+
+  <script src="admin.js"></script>
+</body>
+</html>
