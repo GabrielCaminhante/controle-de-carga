@@ -225,6 +225,14 @@ function atualizarStatusGlobal(numero, status) {
   localStorage.setItem("estadoGlobal", JSON.stringify(estadoGlobal));
 }
 
+function abrirPainelMotorista() {
+  window.open("motorista.html", "painelMotorista");
+}
+
+function abrirPainelCadastro() {
+  window.open("cadastro.html", "PainelCadastro");
+}
+
 function desativarLinha(linha) {
   linha.querySelectorAll("button").forEach(btn => btn.disabled = true);
   linha.querySelectorAll("input").forEach(input => input.disabled = true);
@@ -443,5 +451,6 @@ document.addEventListener("DOMContentLoaded", () => {
   preencherTabelaAgendamentoSemanal();
   rolarParaCargaAtual();
 });
+
 
 
