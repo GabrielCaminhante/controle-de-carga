@@ -1,3 +1,37 @@
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyDDe6xbahCkZzLAcA7KbPNhZH8hsDhPR0A",
+  authDomain: "controle-de-carregamento-ef09e.firebaseapp.com",
+  databaseURL: "https://controle-de-carregamento-ef09e-default-rtdb.firebaseio.com",
+  projectId: "controle-de-carregamento-ef09e",
+  storageBucket: "controle-de-carregamento-ef09e.firebasestorage.app",
+  messagingSenderId: "558587323347",
+  appId: "1:558587323347:web:d60148e643be9aca9bc526"
+};
+
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+const db = firebase.database();
+
+
+// 🔄 Funções de leitura e escrita
+function escutarEstadoGlobal(callback) {
+  db.ref("estadoGlobal").on("value", (snapshot) => {
+    const estado = snapshot.val();
+    if (estado) callback(estado);
+  });
+}
+
+function salvarEstadoGlobal(estado) {
+  db.ref("estadoGlobal").set(estado);
+}
+
+// 🔁 Variáveis globais
 let linhasCargas = [];
 let linhasAgendamento = [];
 const porLote = 38;
@@ -18,8 +52,8 @@ function redistribuirLinhas() {
 
   for (let l = 0; l < numLotes; l++) {
     const bloco = document.createElement("div");
-    bloco.classList.add("tabela-bloco-carga")
-;
+    bloco.classList.add("tabela-bloco-carga");
+
     const tabela = document.createElement("table");
     tabela.innerHTML = `<thead><tr><th>Nº</th><th>Transportadora</th></tr></thead>`;
     const tbody = document.createElement("tbody");
@@ -56,15 +90,13 @@ function redistribuirLinhas() {
 function atualizarLinha(i, campo, valor) {
   linhasCargas[i][campo] = valor;
 
-  const estadoGlobal = JSON.parse(localStorage.getItem("estadoGlobal")) || {};
-  estadoGlobal.cargas = linhasCargas;
-
-  // Espelha no controle
-  if (estadoGlobal.controle && estadoGlobal.controle[i]) {
-    estadoGlobal.controle[i].transportadora = linhasCargas[i].transportadora;
-  }
-
-  localStorage.setItem("estadoGlobal", JSON.stringify(estadoGlobal));
+  escutarEstadoGlobal((estadoGlobal) => {
+    estadoGlobal.cargas = linhasCargas;
+    if (estadoGlobal.controle && estadoGlobal.controle[i]) {
+      estadoGlobal.controle[i].transportadora = linhasCargas[i].transportadora;
+    }
+    salvarEstadoGlobal(estadoGlobal);
+  });
 }
 
 function navegarComTeclas(event, index) {
@@ -123,129 +155,108 @@ function removerUltimaLinha() {
 }
 
 function salvarConfiguracao() {
-  const estadoGlobal = JSON.parse(localStorage.getItem("estadoGlobal")) || {};
-  estadoGlobal.cargas = linhasCargas;
-  estadoGlobal.agendamento = linhasAgendamento;
-  localStorage.setItem("estadoGlobal", JSON.stringify(estadoGlobal));
+  escutarEstadoGlobal((estadoGlobal) => {
+    estadoGlobal.cargas = linhasCargas;
+    estadoGlobal.agendamento = linhasAgendamento;
+    salvarEstadoGlobal(estadoGlobal);
+  });
 }
 
-
 function restaurarTabelaDeCargas() {
-  const estadoGlobal = JSON.parse(localStorage.getItem("estadoGlobal")) || {};
-  const dados = Array.isArray(estadoGlobal.cargas) ? estadoGlobal.cargas : [];
-
-  linhasCargas = dados;
-  redistribuirLinhas();
+  escutarEstadoGlobal((estadoGlobal) => {
+    const dados = Array.isArray(estadoGlobal.cargas) ? estadoGlobal.cargas : [];
+    linhasCargas = dados;
+    redistribuirLinhas();
+  });
 }
 
 // 📊 Contador
-function contarCargasPorTransportadora() {
-  const contagem = {};
-  linhasCargas.forEach(linha => {
-    const nome = linha.transportadora.trim();
-    if (nome) contagem[nome] = (contagem[nome] || 0) + 1;
-  });
-  return contagem;
-}
-
 function mostrarContador() {
-  const estadoGlobal = JSON.parse(localStorage.getItem("estadoGlobal")) || { controle: [], agendamento: [] };
-  const cargas = estadoGlobal.controle || [];
-  const agendamento = estadoGlobal.agendamento || [];
+  escutarEstadoGlobal((estadoGlobal) => {
+    const cargas = estadoGlobal.controle || [];
+    const agendamento = estadoGlobal.agendamento || [];
 
-  // 📦 Totais por status
-  const total = cargas.length;
-  const statusContagem = {
-    atual: 0,
-    saiu: 0,
-    pulou: 0,
-    pendente: 0
-  };
+    const total = cargas.length;
+    const statusContagem = { atual: 0, saiu: 0, pulou: 0, pendente: 0 };
+    const porTransportadora = {};
 
-  // 🚚 Contagem por transportadora e status
-  const porTransportadora = {};
-  cargas.forEach(item => {
-    const nome = item.transportadora?.trim() || "Sem nome";
-    const status = item.status || "pendente";
+    cargas.forEach(item => {
+      const nome = item.transportadora?.trim() || "Sem nome";
+      const status = item.status || "pendente";
 
-    statusContagem[status] = (statusContagem[status] || 0) + 1;
+      statusContagem[status] = (statusContagem[status] || 0) + 1;
 
-    if (!porTransportadora[nome]) {
-      porTransportadora[nome] = { total: 0, atual: 0, saiu: 0, pulou: 0, pendente: 0 };
-    }
+      if (!porTransportadora[nome]) {
+        porTransportadora[nome] = { total: 0, atual: 0, saiu: 0, pulou: 0, pendente: 0 };
+      }
 
-    porTransportadora[nome].total++;
-    porTransportadora[nome][status]++;
-  });
-
-  const textoTransportadoras = Object.entries(porTransportadora)
-    .map(([nome, dados]) => {
-      return `${nome}: ${dados.total} carga${dados.total > 1 ? "s" : ""} ` +
-             `(✅ ${dados.saiu || 0}, ⏭ ${dados.pulou || 0}, 🔄 ${dados.atual || 0}, 📥 ${dados.pendente || 0})`;
-    })
-    .join("\n");
-
-  // 🔁 Verificar sequência de mesma transportadora
-  const sequenciasEncontradas = [];
-  for (let i = 1; i < cargas.length; i++) {
-    const atual = cargas[i].transportadora?.trim();
-    const anterior = cargas[i - 1].transportadora?.trim();
-    if (atual && atual === anterior) {
-      sequenciasEncontradas.push({ nome: atual, linhas: [i - 1, i] });
-    }
-  }
-
-  let textoSequencia = "";
-  if (sequenciasEncontradas.length > 0) {
-    const agrupadas = {};
-    sequenciasEncontradas.forEach(({ nome, linhas }) => {
-      if (!agrupadas[nome]) agrupadas[nome] = new Set();
-      linhas.forEach(i => agrupadas[nome].add(i));
+      porTransportadora[nome].total++;
+      porTransportadora[nome][status]++;
     });
 
-    const detalhes = Object.entries(agrupadas)
-      .map(([nome, linhas]) => {
-        const lista = [...linhas].map(i => `#${i + 1}`).join(", ");
-        return `🔁 ${nome} em sequência nas linhas: ${lista}`;
-      })
+    const textoTransportadoras = Object.entries(porTransportadora)
+      .map(([nome, dados]) => `${nome}: ${dados.total} carga${dados.total > 1 ? "s" : ""} (✅ ${dados.saiu || 0}, ⏭ ${dados.pulou || 0}, 🔄 ${dados.atual || 0}, 📥 ${dados.pendente || 0})`)
       .join("\n");
 
-    textoSequencia = `🔁 Sequências detectadas:\n${detalhes}`;
-  } else {
-    textoSequencia = "✅ Nenhuma sequência repetida de transportadora.";
-  }
+    const sequenciasEncontradas = [];
+    for (let i = 1; i < cargas.length; i++) {
+      const atual = cargas[i].transportadora?.trim();
+      const anterior = cargas[i - 1].transportadora?.trim();
+      if (atual && atual === anterior) {
+        sequenciasEncontradas.push({ nome: atual, linhas: [i - 1, i] });
+      }
+    }
 
-  // 📅 Agendamentos do dia
-  const hoje = new Date();
-  const diaSemana = (hoje.getDay() + 6) % 7;
-  const nomeDia = ["Seg", "Ter", "Qua", "Qui", "Sex", "Sáb", "Dom"][diaSemana];
+    let textoSequencia = "";
+    if (sequenciasEncontradas.length > 0) {
+      const agrupadas = {};
+      sequenciasEncontradas.forEach(({ nome, linhas }) => {
+        if (!agrupadas[nome]) agrupadas[nome] = new Set();
+        linhas.forEach(i => agrupadas[nome].add(i));
+      });
 
-  const agendamentosHoje = agendamento
-    .map(item => ({
-      transportadora: item.transportadora,
-      horario: item.dias?.[diaSemana] || ""
-    }))
-    .filter(item => item.horario);
+      const detalhes = Object.entries(agrupadas)
+        .map(([nome, linhas]) => {
+          const lista = [...linhas].map(i => `#${i + 1}`).join(", ");
+          return `🔁 ${nome} em sequência nas linhas: ${lista}`;
+        })
+        .join("\n");
 
-  const textoAgendamento = agendamentosHoje.length > 0
-    ? agendamentosHoje.map(a => `📅 ${a.transportadora}: ${a.horario}`).join("\n")
-    : "📭 Nenhuma transportadora agendada para hoje.";
+      textoSequencia = `🔁 Sequências detectadas:\n${detalhes}`;
+    } else {
+      textoSequencia = "✅ Nenhuma sequência repetida de transportadora.";
+    }
 
-  // 📊 Exibir tudo
-  alert(
-    `📊 Estatísticas de Cargas (tempo real):\n\n` +
-    `Total: ${total}\n` +
-    `✅ Finalizadas: ${statusContagem.saiu || 0}\n` +
-    `🔄 Em andamento: ${statusContagem.atual || 0}\n` +
-    `⏭ Puladas: ${statusContagem.pulou || 0}\n` +
-    `📥 Pendentes: ${statusContagem.pendente || 0}\n\n` +
-    `📦 Por transportadora:\n${textoTransportadoras}\n\n` +
-    `${textoSequencia}\n\n` +
-    `📅 Agendamentos para ${nomeDia}:\n${textoAgendamento}`
-  );
+    const hoje = new Date();
+    const diaSemana = (hoje.getDay() + 6) % 7;
+    const nomeDia = ["Seg", "Ter", "Qua", "Qui", "Sex", "Sáb", "Dom"][diaSemana];
+
+    const agendamentosHoje = agendamento
+      .map(item => ({
+        transportadora: item.transportadora,
+        horario: item.dias?.[diaSemana] || ""
+      }))
+      .filter(item => item.horario);
+
+    const textoAgendamento = agendamentosHoje.length > 0
+      ? agendamentosHoje.map(a => `📅 ${a.transportadora}: ${a.horario}`).join("\n")
+      : "📭 Nenhuma transportadora agendada para hoje.";
+
+     alert(
+      `📊 Estatísticas de Cargas (tempo real):\n\n` +
+      `Total: ${total}\n` +
+      `✅ Finalizadas: ${statusContagem.saiu || 0}\n` +
+      `🔄 Em andamento: ${statusContagem.atual || 0}\n` +
+      `⏭ Puladas: ${statusContagem.pulou || 0}\n` +
+      `📥 Pendentes: ${statusContagem.pendente || 0}\n\n` +
+      `📦 Por transportadora:\n${textoTransportadoras}\n\n` +
+      `${textoSequencia}\n\n` +
+      `📅 Agendamentos para ${nomeDia}:\n${textoAgendamento}`
+    );
+  });
 }
 
-// 📅 Tabela de Agendamento Semanal
+
 function redistribuirAgendamento() {
   const tabela = document.querySelector("#tabela-semanal tbody");
   tabela.innerHTML = "";
@@ -260,8 +271,8 @@ function redistribuirAgendamento() {
     inputTransportadora.setAttribute("list", "lista-transportadoras");
     inputTransportadora.oninput = () => {
       linhasAgendamento[index].transportadora = inputTransportadora.value;
-        atualizarListaTransportadoras();
-        salvarAgendamento(); // ✅ salva imediatamente
+      atualizarListaTransportadoras();
+      salvarAgendamento();
     };
 
     tdTransportadora.appendChild(inputTransportadora);
@@ -289,60 +300,57 @@ function redistribuirAgendamento() {
 function adicionarLinhaAgendamento() {
   linhasAgendamento.push({ transportadora: "", dias: Array(7).fill("") });
 
-  const estadoGlobal = JSON.parse(localStorage.getItem("estadoGlobal")) || {};
-  estadoGlobal.agendamento = linhasAgendamento;
-  localStorage.setItem("estadoGlobal", JSON.stringify(estadoGlobal));
-  redistribuirAgendamento();
+  escutarEstadoGlobal((estadoGlobal) => {
+    estadoGlobal.agendamento = linhasAgendamento;
+    salvarEstadoGlobal(estadoGlobal);
+    redistribuirAgendamento();
+  });
 }
 
 function removerUltimaLinhaAgendamento() {
   if (linhasAgendamento.length > 0) {
     linhasAgendamento.pop();
 
-    const estadoGlobal = JSON.parse(localStorage.getItem("estadoGlobal")) || {};
-    estadoGlobal.agendamento = linhasAgendamento;
-    localStorage.setItem("estadoGlobal", JSON.stringify(estadoGlobal));
-
-    redistribuirAgendamento();
+    escutarEstadoGlobal((estadoGlobal) => {
+      estadoGlobal.agendamento = linhasAgendamento;
+      salvarEstadoGlobal(estadoGlobal);
+      redistribuirAgendamento();
+    });
   }
 }
 
 function salvarAgendamento() {
-  const estadoGlobal = JSON.parse(localStorage.getItem("estadoGlobal")) || {};
-  estadoGlobal.agendamento = linhasAgendamento;
-  localStorage.setItem("estadoGlobal", JSON.stringify(estadoGlobal));
+  escutarEstadoGlobal((estadoGlobal) => {
+    estadoGlobal.agendamento = linhasAgendamento;
+    salvarEstadoGlobal(estadoGlobal);
+  });
 }
 
 function restaurarAgendamentoSemanal() {
-  const estadoGlobal = JSON.parse(localStorage.getItem("estadoGlobal")) || {};
-  const dados = Array.isArray(estadoGlobal.agendamento) ? estadoGlobal.agendamento : [];
+  escutarEstadoGlobal((estadoGlobal) => {
+    const dados = Array.isArray(estadoGlobal.agendamento) ? estadoGlobal.agendamento : [];
 
-  linhasAgendamento = dados.map(item => ({
-    transportadora: typeof item.transportadora === "string" ? item.transportadora : "",
-    dias: Array.isArray(item.dias) && item.dias.length === 7
-      ? item.dias.map(h => typeof h === "string" ? h : "")
-      : Array(7).fill("")
-  }));
+    linhasAgendamento = dados.map(item => ({
+      transportadora: typeof item.transportadora === "string" ? item.transportadora : "",
+      dias: Array.isArray(item.dias) && item.dias.length === 7
+        ? item.dias.map(h => typeof h === "string" ? h : "")
+        : Array(7).fill("")
+    }));
 
-  redistribuirAgendamento();
+    redistribuirAgendamento();
+  });
 }
 
-
-// ✅ Preenchimento automático apenas para transportadoras
 function atualizarListaTransportadoras() {
   const nomesCargas = linhasCargas.map(l => l.transportadora.trim());
   const nomesAgendamento = linhasAgendamento.map(l => l.transportadora.trim());
 
-  // 🔄 Transportadoras cadastradas no painel de cadastro
   const dadosCadastro = JSON.parse(localStorage.getItem("cadastrosTransportadoras")) || {};
   const nomesCadastro = Object.keys(dadosCadastro);
 
-  // 🔁 Unificar e remover duplicados
-  const todos = [...nomesCargas, ...nomesAgendamento, ...nomesCadastro]
-    .filter(n => n.length > 0);
+  const todos = [...nomesCargas, ...nomesAgendamento, ...nomesCadastro].filter(n => n.length > 0);
   const unicos = [...new Set(todos)];
 
-  // 🧾 Atualizar datalist
   const datalist = document.getElementById("lista-transportadoras");
   if (!datalist) return;
 
@@ -371,22 +379,26 @@ function abrirPainelCadastro() {
 function zerarTransportadoras() {
   if (!confirm("⚠ Isso irá apagar todos os nomes das transportadoras. Deseja continuar?")) return;
 
-  // Zera os nomes no array principal
   linhasCargas = linhasCargas.map(linha => ({ ...linha, transportadora: "" }));
-
-  // Atualiza visualmente
   redistribuirLinhas();
 
-  // Atualiza estadoGlobal
-  const estadoGlobal = JSON.parse(localStorage.getItem("estadoGlobal")) || {};
-  estadoGlobal.cargas = linhasCargas;
-  localStorage.setItem("estadoGlobal", JSON.stringify(estadoGlobal));
-
-  alert("✅ Nomes das transportadoras zerados com sucesso.");
+  escutarEstadoGlobal((estadoGlobal) => {
+    estadoGlobal.cargas = linhasCargas;
+    salvarEstadoGlobal(estadoGlobal);
+    alert("✅ Nomes das transportadoras zerados com sucesso.");
+  });
 }
 
-// 🚀 Inicialização
 document.addEventListener("DOMContentLoaded", () => {
-  restaurarTabelaDeCargas();
-  restaurarAgendamentoSemanal();
+  escutarEstadoGlobal((estadoGlobal) => {
+    const cargas = Array.isArray(estadoGlobal.cargas) ? estadoGlobal.cargas : [];
+    const agendamento = Array.isArray(estadoGlobal.agendamento) ? estadoGlobal.agendamento : [];
+
+    linhasCargas = cargas;
+    linhasAgendamento = agendamento;
+
+    redistribuirLinhas();
+    redistribuirAgendamento();
+  });
 });
+
